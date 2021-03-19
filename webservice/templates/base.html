@@ -13,13 +13,16 @@
         <script src="{{ url_for('.static', filename='js/bootstrap.min.js') }}"></script>
         <script src="{{ url_for('.static', filename='js/all.js') }}"></script>
         <script src="{{ url_for('.static', filename='js/script.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
     {% endblock %}
     {% block title %}
         <title>Snorbro_analitics</title>
     {% endblock %}
 {% endblock %}
 {% block body %}
-
+    <h1 class="text-center">Анализ динамики изменения цен на акции</h1>
     {% block content %}
     {% endblock %}
 

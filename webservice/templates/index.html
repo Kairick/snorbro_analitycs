@@ -1,16 +1,93 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-6">
-            <form name="Chart" action="/get_stock_chart" method="POST">
-                {{form.stock}}
-                <input type="submit" value="Выбрать">
-            </form>
-        </div>
-        <div class="col-lg-6">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <h4>Выберите акцию из списка</h4>
+                <form name="Chart" action="/stock_chart" method="POST">
+                    {{ form.stock }}
+                    <input type="submit" value="Выбрать">
+                </form>
+            </div>
+            <div class="col-lg-9">
+                {% if stock %}
 
+                    <h2 class="text-center">{{ stock }}</h2>
+
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                            aria-expanded="true" aria-controls="collapseOne">
+                                        За все время
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                 data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class='chart' id='barchart11'>
+                                        <script>
+                                            var fig = {{chart[0] | safe}};
+                                            Plotly.plot('barchart11', fig);
+                                        </script>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse"
+                                            data-target="#collapseTwo" aria-expanded="false"
+                                            aria-controls="collapseTwo">
+                                        2019
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                                 data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class='chart' id='barchart12'>
+                                        <script>
+                                            var fig1 = {{chart[1] | safe}};
+                                            Plotly.plot('barchart12', fig1);
+                                        </script>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse"
+                                            data-target="#collapseThree" aria-expanded="false"
+                                            aria-controls="collapseThree">
+                                        С 2020 по н.в.
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse show" aria-labelledby="headingThree"
+                                 data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class='chart' id='barchart13'>
+                                        <script>
+                                            var fig2 = {{chart[2] | safe}};
+                                            Plotly.plot('barchart13', fig2);
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
         </div>
+
     </div>
-</div>
+    </div>
 {% endblock %}
